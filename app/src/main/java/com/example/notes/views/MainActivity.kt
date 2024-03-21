@@ -9,33 +9,29 @@ import com.example.notes.models.Note
 import com.example.notes.models.NoteModel
 import com.example.notes.presenter.MainPresenter
 import java.util.*
-import kotlin.collections.ArrayList
+//import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity(), IMainActivity{
 
     private val presenter = MainPresenter(this, NoteModel())
-
     lateinit var binding: ActivityMainBinding
     lateinit var adapter: NoteAdapter
     lateinit var recyclerView: RecyclerView
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        presenter.loadNotes()
-
         initialAdapter()
-
+        presenter.loadNotes()
     }
 
-    private fun initialAdapter(){
+    private fun initialAdapter() {
         recyclerView = binding.recyclerView
         adapter = NoteAdapter()
         recyclerView.adapter = adapter
-
         adapter.setList(myNote())
     }
 
@@ -43,7 +39,7 @@ class MainActivity : AppCompatActivity(), IMainActivity{
     fun myNote(): ArrayList<Note>{
         val notesList = ArrayList<Note>()
 
-        val note1 = Note(1, "Matvey", "MSGFSOGFFOP", Date(), Date())
+        val note1 = Note(1, "Matvey", "MASTIFFS", Date(), Date())
         notesList.add(note1)
 //
 //        val note2 = Note(2, "Pasha", "1231231", Date(), Date())
@@ -59,7 +55,8 @@ class MainActivity : AppCompatActivity(), IMainActivity{
     }
 
     override fun showNotes(notes: List<Note>) {
-        TODO("Not yet implemented")
+        //adapter.setList(notes)
+
     }
 
 

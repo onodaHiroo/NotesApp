@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">notes</string>
+    <string name="text">Text</string>
+    <string name="title">Title</string>
+    <string name="change_date">Change Date</string>
+    <string name="create_date">Create Date</string>
 </resources>

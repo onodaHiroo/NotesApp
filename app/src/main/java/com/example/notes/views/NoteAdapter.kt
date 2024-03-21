@@ -10,6 +10,7 @@ import com.example.notes.R
 import com.example.notes.databinding.ViewHolderBinding
 import com.example.notes.models.Note
 import com.example.notes.models.NoteModel
+import java.util.Collections.emptyList
 
 class NoteAdapter: RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 

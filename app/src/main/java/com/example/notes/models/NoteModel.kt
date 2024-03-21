@@ -8,18 +8,14 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class NoteModel : INoteList {
-    //private val notes: MutableList<Note> = ArrayList<Note>()) : List<Note> by notes, INoteList{
+
     private val notes = mutableListOf<Note>()
+    private val notes2 = emptyList<Note>()
+    //private val notes = emptyList<Note>()
 
-    override fun TestAddNotes(): MutableList<Note> {
-        return mutableListOf()
-    }
-
-    override fun ShowNoteList() {
-    }
 
     override fun getAllNotes(): List<Note> {
-        return notes.toList()
+        return notes.toList<Note>()
     }
 
     override fun getNote(id: Int): Note? {
