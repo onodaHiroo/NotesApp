@@ -41,15 +41,15 @@ class MainActivity : AppCompatActivity(), IMainActivity{
 
         val note1 = Note(1, "Matvey", "MASTIFFS", Date(), Date())
         notesList.add(note1)
-//
-//        val note2 = Note(2, "Pasha", "1231231", Date(), Date())
-//        notesList.add(note2)
-//
-//        val note3 = Note(3, "Arsenij", "hgllldfd", Date(), Date())
-//        notesList.add(note3)
-//
-//        val note4 = Note(4, "notes", "ya tupoi", Date(), Date())
-//        notesList.add(note4)
+
+        val note2 = Note(2, "Pasha", "1231231", Date(), Date())
+        notesList.add(note2)
+
+        val note3 = Note(3, "Arsenij", "hgllldfd", Date(), Date())
+        notesList.add(note3)
+
+        val note4 = Note(4, "notes", "ya tupoi", Date(), Date())
+        notesList.add(note4)
 
         return notesList
     }
@@ -59,5 +59,5 @@ class MainActivity : AppCompatActivity(), IMainActivity{
 
     }
 
-
+//РАБОТАЕТ КОГДА МЕНЯЕШЬ ВЕРСИЮ СДК
 }
