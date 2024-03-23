@@ -2,11 +2,11 @@ package com.example.notes.presenter
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.example.notes.models.INoteList
 import com.example.notes.models.Note
-import com.example.notes.models.NoteModel
-import com.example.notes.views.MainActivity
+import com.example.notes.views.IMainActivity
 
-class MainPresenter (private val view: MainActivity, private val model: NoteModel) : IMainPresenter {
+class MainPresenter (private val view: IMainActivity, private val model: INoteList) : IMainPresenter {
 
 
     override fun loadNotes() {
@@ -27,6 +27,19 @@ class MainPresenter (private val view: MainActivity, private val model: NoteMode
     override fun editNote(note: Note) {
         model.editNote(note)
         view.showNotes(model.getAllNotes())
+    }
+
+    override fun getNoteById(id: Int) {
+        val note = model.getNoteById(id)
+        if (note != null) {
+            //view.displayNoteDetails(note)
+        } else {
+            //view.showNoteNotFoundError()
+        }
+    }
+
+    override fun simpleTest():INoteList {
+        return model.simpleTest()
     }
 
 

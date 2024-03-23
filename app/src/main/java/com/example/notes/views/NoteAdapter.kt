@@ -1,10 +1,12 @@
 package com.example.notes.views
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.R
 import com.example.notes.databinding.ViewHolderBinding
@@ -12,7 +14,7 @@ import com.example.notes.models.Note
 import com.example.notes.models.NoteModel
 import java.util.Collections.emptyList
 
-class NoteAdapter: RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
+class NoteAdapter(private val context: Context): RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
     class NoteViewHolder(view: View): RecyclerView.ViewHolder(view)
     private var noteList = emptyList<Note>()
@@ -28,6 +30,9 @@ class NoteAdapter: RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
         holder.itemView.findViewById<TextView>(R.id.text).text = noteList[position].text
         holder.itemView.findViewById<TextView>(R.id.create_date).text = noteList[position].createDate.toString()
         holder.itemView.findViewById<TextView>(R.id.change_date).text = noteList[position].changeDate.toString()
+        holder.itemView.setOnClickListener{
+            Toast.makeText(context, "${position}", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun getItemCount(): Int {

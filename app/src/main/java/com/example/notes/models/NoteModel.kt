@@ -5,7 +5,8 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import java.time.LocalDate
 import java.util.*
-import kotlin.collections.ArrayList
+import java.util.Collections.emptyList
+
 
 class NoteModel : INoteList {
 
@@ -18,7 +19,7 @@ class NoteModel : INoteList {
         return notes.toList<Note>()
     }
 
-    override fun getNote(id: Int): Note? {
+    override fun getNoteById(id: Int): Note? {
         return notes.find { it.id == id }
     }
 
@@ -37,6 +38,14 @@ class NoteModel : INoteList {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun deleteNote(id: Int) {
         notes.removeIf { it.id == id }
+    }
+
+    override fun simpleTest():NoteModel {
+        notes.add(Note(1, "test1", "test1", Date(), Date()))
+        notes.add(Note(2, "test2", "test2", Date(), Date()))
+        notes.add(Note(3, "test3", "test3", Date(), Date()))
+        notes.add(Note(4, "test4", "test4", Date(), Date()))
+        return this
     }
 
 
