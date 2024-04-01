@@ -1,9 +1,7 @@
 package com.example.notes.models
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
-import java.time.LocalDate
 import java.util.*
 import java.util.Collections.emptyList
 
@@ -41,14 +39,18 @@ class NoteModel : INoteList {
     }
 
     override fun simpleTest():NoteModel {
-        notes.add(Note(1, "test1", "test1", Date(), Date()))
-        notes.add(Note(2, "test2", "test2", Date(), Date()))
-        notes.add(Note(3, "test3", "test3", Date(), Date()))
-        notes.add(Note(4, "test4", "test4", Date(), Date()))
-        notes.add(Note(5, "test5", "test5", Date(), Date()))
-        notes.add(Note(6, "test6", "test7", Date(), Date()))
+        notes.add(Note(getLastId(), "test${getLastId()}", "test${getLastId()}", Date(), Date()))
+        notes.add(Note(getLastId(), "test${getLastId()}", "test${getLastId()}", Date(), Date()))
+        notes.add(Note(getLastId(), "test${getLastId()}", "test${getLastId()}", Date(), Date()))
         return this
     }
 
+    override fun getLastId(): Int {
+        var lastIndexOfList = 0
+        if (notes.lastIndex == -1) { lastIndexOfList = 0 }
+        else lastIndexOfList = notes.lastIndex + 1
+
+        return lastIndexOfList
+    }
 
 }

@@ -75,11 +75,20 @@ class MainActivity : AppCompatActivity(), IMainActivity{
             val inflater = layoutInflater
             val dialogLayout = inflater.inflate(R.layout.edit_note_layout, null)
             val editTextTitle = dialogLayout.findViewById<EditText>(R.id.et_editTextTitle)
+            val editTextText = dialogLayout.findViewById<EditText>(R.id.et_editTextText)
 
             builder.setTitle("Write Some")
             builder.setPositiveButton("OK"){dialog, which ->
-                presenter.addNote(Note(10, editTextTitle.text.toString(), "something", Date(), Date()))
-                Log.d("testAddingNotes", "note with id 10 added")
+                presenter.addNote(
+                    Note(
+                        presenter.getLastId(),
+                        editTextTitle.text.toString(),
+                        editTextText.text.toString(),
+                        Date(),
+                        Date()
+                    )
+                )
+                Log.d("testAddingNotes", "Note [${presenter.getLastId() - 1}] (${editTextTitle.text}, ${editTextText.text}) added")
             }
             builder.setNegativeButton("Cancel"){dialog, which ->
                 Log.d("Main", "NegativeButtonClicked")

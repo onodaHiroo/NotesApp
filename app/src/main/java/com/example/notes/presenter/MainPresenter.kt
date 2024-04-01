@@ -41,6 +41,10 @@ class MainPresenter (private var view: IMainActivity?, private val model: INoteL
         return model.simpleTest()
     }
 
+    override fun getLastId():Int{
+        return model.getLastId()
+    }
+
     override fun detach() { view = null }
 
 }

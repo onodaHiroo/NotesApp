@@ -4,8 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidStudio/Android Studio Projects/notes/app/src/main/res/drawable/ic_launcher_background.xml" value="0.148" />
-        <entry key="..\:/AndroidStudio/Android Studio Projects/notes/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/AndroidStudio/Android Studio Projects/notes/app/src/main/res/layout/edit_note_layout.xml" value="0.1" />
+        <entry key="..\:/AndroidStudio/Android Studio Projects/notes/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/AndroidStudio/Android Studio Projects/notes/app/src/main/res/layout/edit_note_layout.xml" value="0.33" />
         <entry key="..\:/AndroidStudio/Android Studio Projects/notes/app/src/main/res/layout/edit_text_layout.xml" value="0.2336448598130841" />
         <entry key="..\:/AndroidStudio/Android Studio Projects/notes/app/src/main/res/layout/view_holder.xml" value="0.35260416666666666" />
       </map>

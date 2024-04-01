@@ -8,4 +8,5 @@ interface INoteList {
     fun editNote(note: Note)
     fun deleteNote(id: Int)
     fun simpleTest():NoteModel
+    fun getLastId():Int
 }
