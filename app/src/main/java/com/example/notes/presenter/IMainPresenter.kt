@@ -10,4 +10,5 @@ interface IMainPresenter {
     fun editNote(note: Note)
     fun getNoteById(id: Int)
     fun simpleTest():INoteList
+    fun detach()
 }

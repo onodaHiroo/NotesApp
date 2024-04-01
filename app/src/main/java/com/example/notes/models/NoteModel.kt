@@ -45,6 +45,8 @@ class NoteModel : INoteList {
         notes.add(Note(2, "test2", "test2", Date(), Date()))
         notes.add(Note(3, "test3", "test3", Date(), Date()))
         notes.add(Note(4, "test4", "test4", Date(), Date()))
+        notes.add(Note(5, "test5", "test5", Date(), Date()))
+        notes.add(Note(6, "test6", "test7", Date(), Date()))
         return this
     }
 
