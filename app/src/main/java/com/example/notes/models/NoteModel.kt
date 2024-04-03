@@ -1,6 +1,7 @@
 package com.example.notes.models
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import java.util.*
 import java.util.Collections.emptyList
@@ -35,9 +36,11 @@ class NoteModel : INoteList {
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun deleteNote(id: Int) {
-        notes.removeIf { it.id == id }
+        notes.removeAt(id)
+        Log.d("Check IDs of list", "${notes}")
     }
 
+    ////test
     override fun simpleTest():NoteModel {
         notes.add(Note(getLastId(), "test${getLastId()}", "test${getLastId()}", Date(), Date()))
         notes.add(Note(getLastId(), "test${getLastId()}", "test${getLastId()}", Date(), Date()))
@@ -52,5 +55,6 @@ class NoteModel : INoteList {
 
         return lastIndexOfList
     }
+    ////test
 
 }

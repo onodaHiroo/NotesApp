@@ -59,11 +59,9 @@ class MainActivity : AppCompatActivity(), IMainActivity{
     }
 
     private fun initialSwipeItem(){
-        val itemTouchHelper = ItemTouchHelper(SwipeItem(adapter))
+        val itemTouchHelper = ItemTouchHelper(SwipeItem(adapter, this))
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
-
-
 
     fun myNote():List<Note>{
         return presenter.simpleTest().getAllNotes()
@@ -71,6 +69,14 @@ class MainActivity : AppCompatActivity(), IMainActivity{
 
     override fun showNotes(notes: List<Note>) {
         adapter.setList(notes)
+    }
+
+    override fun deleteNotes(noteId: Int){
+        presenter.deleteNote(noteId)
+    }
+
+    override fun changeNotes(){
+        //changeNoteToDo
     }
 
     @RequiresApi(Build.VERSION_CODES.R)

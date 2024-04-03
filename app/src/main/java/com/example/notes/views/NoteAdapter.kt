@@ -2,11 +2,14 @@ package com.example.notes.views
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.R
 
@@ -44,13 +47,13 @@ class NoteAdapter(private val context: Context): RecyclerView.Adapter<NoteAdapte
         notifyDataSetChanged()
     }
 
-    fun deleteNote(position: Int) {
-        noteList.removeAt(position)
-        notifyItemRemoved(position)
-    }
+//    fun deleteNote(position: Int) {
+//        noteList.removeAt(position)
+//        notifyItemRemoved(position)
+//    }
 
-    fun changeNote(position: Int, note: Note){
-        noteList[position] = note
-        notifyDataSetChanged()
-    }
+//    fun changeNote(position: Int, note: Note){
+//        noteList[position] = note
+//        notifyDataSetChanged()
+//    }
 }

@@ -5,4 +5,6 @@ import com.example.notes.models.Note
 interface IMainActivity {
     fun showNotes(notes: List<Note>)
     fun showEditTextDialog()
+    fun deleteNotes(noteId: Int)
+    fun changeNotes()
 }

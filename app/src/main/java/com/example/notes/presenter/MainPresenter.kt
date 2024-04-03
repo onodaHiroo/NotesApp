@@ -18,8 +18,8 @@ class MainPresenter (private var view: IMainActivity?, private val model: INoteL
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    override fun deleteNote(note: Note) {
-        model.deleteNote(note.id)
+    override fun deleteNote(noteId: Int) {
+        model.deleteNote(noteId)
         view?.showNotes(model.getAllNotes())
     }
 
