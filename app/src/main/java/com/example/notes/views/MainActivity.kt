@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity(), IMainActivity{
         presenter.deleteNote(noteId)
     }
 
-    override fun changeNotes(){
+    override fun changeNotes(noteId: Int){
         //changeNoteToDo
     }
 

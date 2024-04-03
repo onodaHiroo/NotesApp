@@ -6,5 +6,5 @@ interface IMainActivity {
     fun showNotes(notes: List<Note>)
     fun showEditTextDialog()
     fun deleteNotes(noteId: Int)
-    fun changeNotes()
+    fun changeNotes(noteId: Int)
 }
