@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity(), IMainActivity{
 
     private fun initialAdapter() {
         recyclerView = binding.recyclerView
-        adapter = NoteAdapter(this)
+        adapter = NoteAdapter(this, this)
         recyclerView.adapter = adapter
 
         adapter.setList(myNote())
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), IMainActivity{
     }
 
     private fun initialSwipeItem(){
-        val itemTouchHelper = ItemTouchHelper(SwipeItem(adapter, this))
+        val itemTouchHelper = ItemTouchHelper(SwipeItem(adapter))
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 

@@ -16,7 +16,7 @@ import com.example.notes.R
 import com.example.notes.models.Note
 import java.util.Collections.emptyList
 
-class NoteAdapter(private val context: Context): RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
+class NoteAdapter(private val context: Context, private val activity: IMainActivity): RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
     class NoteViewHolder(view: View): RecyclerView.ViewHolder(view)
     private var noteList = emptyList<Note>()
@@ -34,6 +34,7 @@ class NoteAdapter(private val context: Context): RecyclerView.Adapter<NoteAdapte
         holder.itemView.findViewById<TextView>(R.id.change_date).text = noteList[position].changeDate.toString()
         holder.itemView.setOnClickListener{
             Toast.makeText(context, "${position}", Toast.LENGTH_SHORT).show()
+            changeNote(position)
         }
     }
 
@@ -47,13 +48,11 @@ class NoteAdapter(private val context: Context): RecyclerView.Adapter<NoteAdapte
         notifyDataSetChanged()
     }
 
-//    fun deleteNote(position: Int) {
-//        noteList.removeAt(position)
-//        notifyItemRemoved(position)
-//    }
+    fun deleteNote(position: Int) {
+        activity.deleteNotes(position)
+    }
 
-//    fun changeNote(position: Int, note: Note){
-//        noteList[position] = note
-//        notifyDataSetChanged()
-//    }
+    fun changeNote(position: Int){
+        //activity.changeNotes(position)
+    }
 }
