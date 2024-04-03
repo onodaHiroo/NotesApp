@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), IMainActivity{
 
         initialAdapter()
         initialSwipeItem()
-        showEditTextDialog()
+        initialFAB()
 
     }
 
@@ -63,6 +63,13 @@ class MainActivity : AppCompatActivity(), IMainActivity{
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
+    override fun initialFAB(){
+        val fab: View = findViewById(R.id.addNoteFAB)
+        fab.setOnClickListener{
+            showEditTextDialog()
+        }
+    }
+
     fun myNote():List<Note>{
         return presenter.simpleTest().getAllNotes()
     }
@@ -71,42 +78,61 @@ class MainActivity : AppCompatActivity(), IMainActivity{
         adapter.setList(notes)
     }
 
+    fun addNotes(note: Note){
+        presenter.addNote(note)
+
+    }
+
     override fun deleteNotes(noteId: Int){
         presenter.deleteNote(noteId)
     }
 
-    override fun changeNotes(noteId: Int){
-        //changeNoteToDo
+    override fun editNotes(note: Note){
+        presenter.editNote(note)
     }
 
-    @RequiresApi(Build.VERSION_CODES.R)
-    override fun showEditTextDialog(){
-        val fab: View = findViewById(R.id.addNoteFAB)
-        fab.setOnClickListener{
-            val builder = AlertDialog.Builder(this)
-            val inflater = layoutInflater
-            val dialogLayout = inflater.inflate(R.layout.edit_note_layout, null)
-            val editTextTitle = dialogLayout.findViewById<EditText>(R.id.et_editTextTitle)
-            val editTextText = dialogLayout.findViewById<EditText>(R.id.et_editTextText)
+    override fun showEditTextDialog(noteId: Int?, title: String?, text: String?){
+        val builder = AlertDialog.Builder(this)
+        val inflater = layoutInflater
+        val dialogLayout = inflater.inflate(R.layout.edit_note_layout, null)
+        var editTextTitle = dialogLayout.findViewById<EditText>(R.id.et_editTextTitle)
+        val editTextText = dialogLayout.findViewById<EditText>(R.id.et_editTextText)
 
-            builder.setTitle("Write Some")
+        builder.setTitle("Write Note")
+
+        if (noteId == null){
             builder.setPositiveButton("OK"){dialog, which ->
-                presenter.addNote(
-                    Note(
-                        presenter.getLastId(),
-                        editTextTitle.text.toString(),
-                        editTextText.text.toString(),
-                        Date(),
-                        Date()
-                    )
-                )
+                addNotes(Note(
+                    presenter.getLastId(),
+                    editTextTitle.text.toString(),
+                    editTextText.text.toString(),
+                    Date(),
+                    Date()
+                ))
                 Log.d("testAddingNotes", "Note [${presenter.getLastId() - 1}] (${editTextTitle.text}, ${editTextText.text}) added")
+                }
             }
-            builder.setNegativeButton("Cancel"){dialog, which ->
-                Log.d("Main", "NegativeButtonClicked")
+        else {
+            editTextTitle.setText(title)
+            editTextText.setText(text)
+            builder.setPositiveButton("OK") { dialog, which ->
+                editNotes(
+                    Note(
+                    noteId,
+                    editTextTitle.text.toString(),
+                    editTextText.text.toString(),
+                    Date(),
+                    Date()
+                        )
+                    )
+                }
             }
-            builder.setView(dialogLayout)
-            builder.show()
-        }
+
+        builder.setNegativeButton("Cancel"){dialog, which ->
+            Log.d("Main", "NegativeButtonClicked")
+            }
+        builder.setView(dialogLayout)
+        builder.show()
     }
+
 }

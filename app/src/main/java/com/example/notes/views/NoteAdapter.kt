@@ -2,14 +2,11 @@ package com.example.notes.views
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.R
 
@@ -34,7 +31,7 @@ class NoteAdapter(private val context: Context, private val activity: IMainActiv
         holder.itemView.findViewById<TextView>(R.id.change_date).text = noteList[position].changeDate.toString()
         holder.itemView.setOnClickListener{
             Toast.makeText(context, "${position}", Toast.LENGTH_SHORT).show()
-            changeNote(position)
+            changeNote(position, noteList[position].title, noteList[position].text)
         }
     }
 
@@ -52,7 +49,7 @@ class NoteAdapter(private val context: Context, private val activity: IMainActiv
         activity.deleteNotes(position)
     }
 
-    fun changeNote(position: Int){
-        //activity.changeNotes(position)
+    fun changeNote(position: Int, title: String, text: String){
+        activity.showEditTextDialog(position, title, text)
     }
 }

@@ -4,7 +4,8 @@ import com.example.notes.models.Note
 
 interface IMainActivity {
     fun showNotes(notes: List<Note>)
-    fun showEditTextDialog()
+    fun initialFAB()
     fun deleteNotes(noteId: Int)
-    fun changeNotes(noteId: Int)
+    fun editNotes(note: Note)
+    fun showEditTextDialog(id: Int? = null, title: String? = null, text: String? = null)
 }

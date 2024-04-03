@@ -28,9 +28,8 @@ class NoteModel : INoteList {
     }
 
     override fun editNote(note: Note) {
-        val index = notes.indexOfFirst { it.id == note.id }
-        if (index != -1) {
-            notes[index] = note
+        if (note.id != -1) {
+            notes[note.id] = note
         }
     }
 
