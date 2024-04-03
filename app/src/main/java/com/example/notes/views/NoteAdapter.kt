@@ -27,8 +27,8 @@ class NoteAdapter(private val context: Context, private val activity: IMainActiv
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         holder.itemView.findViewById<TextView>(R.id.title).text = noteList[position].title
         holder.itemView.findViewById<TextView>(R.id.text).text = noteList[position].text
-        holder.itemView.findViewById<TextView>(R.id.create_date).text = noteList[position].createDate.toString()
         holder.itemView.findViewById<TextView>(R.id.change_date).text = noteList[position].changeDate.toString()
+        holder.itemView.findViewById<TextView>(R.id.create_date).text = noteList[position].createDate.toString()
         holder.itemView.setOnClickListener{
             Toast.makeText(context, "${position}", Toast.LENGTH_SHORT).show()
             changeNote(position, noteList[position].title, noteList[position].text)

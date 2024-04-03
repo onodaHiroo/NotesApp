@@ -17,7 +17,7 @@ import com.example.notes.presenter.MainPresenter
 import java.util.*
 
 import androidx.recyclerview.widget.ItemTouchHelper
-
+import java.time.DayOfWeek
 
 
 class MainActivity : AppCompatActivity(), IMainActivity{
@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity(), IMainActivity{
         val builder = AlertDialog.Builder(this)
         val inflater = layoutInflater
         val dialogLayout = inflater.inflate(R.layout.edit_note_layout, null)
-        var editTextTitle = dialogLayout.findViewById<EditText>(R.id.et_editTextTitle)
+        val editTextTitle = dialogLayout.findViewById<EditText>(R.id.et_editTextTitle)
         val editTextText = dialogLayout.findViewById<EditText>(R.id.et_editTextText)
 
         builder.setTitle("Write Note")

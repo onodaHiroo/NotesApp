@@ -29,6 +29,7 @@ class NoteModel : INoteList {
 
     override fun editNote(note: Note) {
         if (note.id != -1) {
+            note.createDate = notes[note.id].createDate
             notes[note.id] = note
         }
     }
