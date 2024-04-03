@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
@@ -31,23 +32,27 @@
             android:textColor="#000000"
             android:textSize="16sp" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="19dp" />
+
         <TextView
             android:id="@+id/change_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/change_date"
-            android:textAlignment="textEnd"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="12sp"
+            app:fontFamily="sans-serif-condensed-light" />
 
         <TextView
             android:id="@+id/create_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/create_date"
-            android:textAlignment="textEnd"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="12sp"
+            app:fontFamily="sans-serif-condensed-light" />
 
     </LinearLayout>
 

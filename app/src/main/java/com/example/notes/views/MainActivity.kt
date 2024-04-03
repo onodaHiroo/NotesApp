@@ -1,6 +1,4 @@
 package com.example.notes.views
-
-import android.icu.number.NumberFormatter.with
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,14 +10,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.R
 import com.example.notes.databinding.ActivityMainBinding
-import com.example.notes.models.INoteList
 import com.example.notes.models.Note
 import com.example.notes.models.NoteModel
 import com.example.notes.presenter.IMainPresenter
 import com.example.notes.presenter.MainPresenter
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
-//import kotlin.collections.ArrayList
+
+import androidx.recyclerview.widget.ItemTouchHelper
+
 
 
 class MainActivity : AppCompatActivity(), IMainActivity{
@@ -39,7 +37,9 @@ class MainActivity : AppCompatActivity(), IMainActivity{
         setContentView(binding.root)
 
         presenter = MainPresenter(this, NoteModel())
+
         initialAdapter()
+        initialSwipeItem()
         showEditTextDialog()
 
     }
@@ -58,6 +58,12 @@ class MainActivity : AppCompatActivity(), IMainActivity{
 
     }
 
+    private fun initialSwipeItem(){
+        val itemTouchHelper = ItemTouchHelper(SwipeItem(adapter))
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+    }
+
+
 
     fun myNote():List<Note>{
         return presenter.simpleTest().getAllNotes()
@@ -68,7 +74,7 @@ class MainActivity : AppCompatActivity(), IMainActivity{
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
-    private fun showEditTextDialog(){
+    override fun showEditTextDialog(){
         val fab: View = findViewById(R.id.addNoteFAB)
         fab.setOnClickListener{
             val builder = AlertDialog.Builder(this)

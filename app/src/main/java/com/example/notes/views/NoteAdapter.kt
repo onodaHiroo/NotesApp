@@ -9,9 +9,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.R
-import com.example.notes.databinding.ViewHolderBinding
+
 import com.example.notes.models.Note
-import com.example.notes.models.NoteModel
 import java.util.Collections.emptyList
 
 class NoteAdapter(private val context: Context): RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
@@ -42,6 +41,16 @@ class NoteAdapter(private val context: Context): RecyclerView.Adapter<NoteAdapte
     @SuppressLint("NotifyDataSetChanged")
     fun setList(list:  List<Note>){
         noteList = list
+        notifyDataSetChanged()
+    }
+
+    fun deleteNote(position: Int) {
+        noteList.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
+    fun changeNote(position: Int, note: Note){
+        noteList[position] = note
         notifyDataSetChanged()
     }
 }
