@@ -6,7 +6,6 @@ import androidx.annotation.RequiresApi
 import java.util.*
 import java.util.Collections.emptyList
 
-
 class NoteModel : INoteList {
 
     private val notes = mutableListOf<Note>()
