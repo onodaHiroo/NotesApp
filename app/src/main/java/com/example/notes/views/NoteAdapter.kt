@@ -45,11 +45,15 @@ class NoteAdapter(private val context: Context, private val activity: IMainActiv
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun deleteNote(position: Int) {
         activity.deleteNotes(position)
+        notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun changeNote(position: Int, title: String, text: String){
         activity.showEditTextDialog(position, title, text)
+        notifyDataSetChanged()
     }
 }

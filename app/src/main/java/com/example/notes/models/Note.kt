@@ -12,10 +12,13 @@ data class Note (
 
     @ColumnInfo
     var title: String,
+
     @ColumnInfo
     var text: String,
+
     @ColumnInfo
     var changeDate: Date?,
+
     @ColumnInfo
     var createDate: Date?
     )
