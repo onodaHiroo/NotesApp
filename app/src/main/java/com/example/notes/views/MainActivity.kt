@@ -1,12 +1,14 @@
 package com.example.notes.views
+import android.app.Application
+import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.R
 import com.example.notes.databinding.ActivityMainBinding
@@ -17,6 +19,8 @@ import com.example.notes.presenter.MainPresenter
 import java.util.*
 
 import androidx.recyclerview.widget.ItemTouchHelper
+import com.example.notes.db.NoteDatabase
+import com.example.notes.db.repository.NoteRepository
 import java.time.DayOfWeek
 
 
@@ -25,12 +29,14 @@ class MainActivity : AppCompatActivity(), IMainActivity{
     //РАБОТАЕТ КОГДА МЕНЯЕШЬ ВЕРСИЮ СДК
     private lateinit var presenter: IMainPresenter
 
+    private lateinit var repository: NoteRepository
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: NoteAdapter
     private lateinit var recyclerView: RecyclerView
 
 
-    @RequiresApi(Build.VERSION_CODES.R)
+   // @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -38,10 +44,10 @@ class MainActivity : AppCompatActivity(), IMainActivity{
 
         presenter = MainPresenter(this, NoteModel())
 
+        initialDatabase()
         initialAdapter()
         initialSwipeItem()
         initialFAB()
-
     }
 
     override fun onStop() {
@@ -54,8 +60,11 @@ class MainActivity : AppCompatActivity(), IMainActivity{
         adapter = NoteAdapter(this, this)
         recyclerView.adapter = adapter
 
-        adapter.setList(myNote())
-
+        //adapter.setList(myNote())
+        getAllNotes().observe(this
+        ) { listNotes ->
+            adapter.setList(listNotes)
+        }
     }
 
     private fun initialSwipeItem(){
@@ -70,6 +79,16 @@ class MainActivity : AppCompatActivity(), IMainActivity{
         }
     }
 
+    fun initialDatabase(){
+        val context = this.application
+        val daoNote = NoteDatabase.getInstance(context)?.getNoteDao()
+        repository = NoteRepository(daoNote!!)
+    }
+
+    fun getAllNotes(): LiveData<List<Note>> {
+        return repository.allNotes
+    }
+
     fun myNote():List<Note>{
         return presenter.simpleTest().getAllNotes()
     }
@@ -80,7 +99,6 @@ class MainActivity : AppCompatActivity(), IMainActivity{
 
     fun addNotes(note: Note){
         presenter.addNote(note)
-
     }
 
     override fun deleteNotes(noteId: Int){
@@ -106,8 +124,8 @@ class MainActivity : AppCompatActivity(), IMainActivity{
                     presenter.getLastId(),
                     editTextTitle.text.toString(),
                     editTextText.text.toString(),
-                    Date(),
-                    Date()
+                    Date().toString(),
+                    Date().toString()
                 ))
                 Log.d("testAddingNotes", "Note [${presenter.getLastId() - 1}] (${editTextTitle.text}, ${editTextText.text}) added")
                 }
@@ -121,8 +139,8 @@ class MainActivity : AppCompatActivity(), IMainActivity{
                     noteId,
                     editTextTitle.text.toString(),
                     editTextText.text.toString(),
-                    Date(),
-                    Date()
+                        Date().toString(),
+                        Date().toString()
                         )
                     )
                 }

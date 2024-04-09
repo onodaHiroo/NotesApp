@@ -41,9 +41,9 @@ class NoteModel : INoteList {
 
     ////test
     override fun simpleTest():NoteModel {
-        notes.add(Note(getLastId(), "test${getLastId()}", "test${getLastId()}", Date(), Date()))
-        notes.add(Note(getLastId(), "test${getLastId()}", "test${getLastId()}", Date(), Date()))
-        notes.add(Note(getLastId(), "test${getLastId()}", "test${getLastId()}", Date(), Date()))
+        notes.add(Note(getLastId(), "test${getLastId()}", "test${getLastId()}", Date().toString(), Date().toString()))
+        notes.add(Note(getLastId(), "test${getLastId()}", "test${getLastId()}", Date().toString(), Date().toString()))
+        notes.add(Note(getLastId(), "test${getLastId()}", "test${getLastId()}", Date().toString(), Date().toString()))
         return this
     }
 

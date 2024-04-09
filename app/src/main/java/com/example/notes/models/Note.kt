@@ -17,8 +17,8 @@ data class Note (
     var text: String,
 
     @ColumnInfo
-    var changeDate: Date?,
+    var changeDate: String,
 
     @ColumnInfo
-    var createDate: Date?
+    var createDate: String
     )

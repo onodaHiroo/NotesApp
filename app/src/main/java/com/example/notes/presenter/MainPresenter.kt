@@ -1,7 +1,7 @@
 package com.example.notes.presenter
 
 import android.os.Build
-import androidx.annotation.RequiresApi
+//import androidx.annotation.RequiresApi
 import com.example.notes.models.INoteList
 import com.example.notes.models.Note
 import com.example.notes.views.IMainActivity
@@ -17,7 +17,7 @@ class MainPresenter (private var view: IMainActivity?, private val model: INoteL
         view?.showNotes(model.getAllNotes())
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
+   //@RequiresApi(Build.VERSION_CODES.N)
     override fun deleteNote(noteId: Int) {
         model.deleteNote(noteId)
         view?.showNotes(model.getAllNotes())
