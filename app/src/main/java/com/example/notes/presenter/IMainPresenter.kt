@@ -12,4 +12,5 @@ interface IMainPresenter {
     fun simpleTest():INoteList
     fun detach()
     fun getLastId():Int
+    fun insertNote(note: Note, onSuccess:() -> Unit)
 }

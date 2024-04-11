@@ -56,4 +56,8 @@ class NoteModel : INoteList {
     }
     ////test
 
+    fun insert(note: Note, onSuccess:() -> Unit){
+
+    }
+
 }

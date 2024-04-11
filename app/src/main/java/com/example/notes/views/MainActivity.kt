@@ -1,27 +1,22 @@
 package com.example.notes.views
-import android.app.Application
-import android.content.Context
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.R
 import com.example.notes.databinding.ActivityMainBinding
-import com.example.notes.models.Note
-import com.example.notes.models.NoteModel
-import com.example.notes.presenter.IMainPresenter
-import com.example.notes.presenter.MainPresenter
-import java.util.*
-
-import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.notes.db.NoteDatabase
 import com.example.notes.db.repository.NoteRepository
-import java.time.DayOfWeek
+import com.example.notes.models.Note
+import com.example.notes.presenter.IMainPresenter
+import com.example.notes.presenter.PresenterToRepo
+import java.util.*
 
 
 class MainActivity : AppCompatActivity(), IMainActivity{
@@ -42,7 +37,8 @@ class MainActivity : AppCompatActivity(), IMainActivity{
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        presenter = MainPresenter(this, NoteModel())
+        //presenter = MainPresenter(this, NoteModel())
+       presenter = PresenterToRepo(this, NoteRepository(NoteDatabase.getInstance(this.application)?.getNoteDao()!!))
 
         initialDatabase()
         initialAdapter()
@@ -89,16 +85,16 @@ class MainActivity : AppCompatActivity(), IMainActivity{
         return repository.allNotes
     }
 
-    fun myNote():List<Note>{
-        return presenter.simpleTest().getAllNotes()
-    }
+//    fun myNote():List<Note>{
+//        return presenter.simpleTest().getAllNotes()
+//    }
 
     override fun showNotes(notes: List<Note>) {
         adapter.setList(notes)
     }
 
     fun addNotes(note: Note){
-        presenter.addNote(note)
+        presenter.insertNote(note){}
     }
 
     override fun deleteNotes(noteId: Int){

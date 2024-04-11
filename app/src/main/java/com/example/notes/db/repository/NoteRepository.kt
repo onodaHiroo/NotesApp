@@ -6,8 +6,6 @@ import com.example.notes.models.Note
 
 class NoteRepository(private val noteDao: INoteDao): INoteRepository {
 
-
-
     override val allNotes: LiveData<List<Note>>
         get() = noteDao.getAllNotes()
 

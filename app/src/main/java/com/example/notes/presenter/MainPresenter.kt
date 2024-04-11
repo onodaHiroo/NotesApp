@@ -1,6 +1,5 @@
 package com.example.notes.presenter
 
-import android.os.Build
 //import androidx.annotation.RequiresApi
 import com.example.notes.models.INoteList
 import com.example.notes.models.Note
@@ -43,6 +42,10 @@ class MainPresenter (private var view: IMainActivity?, private val model: INoteL
 
     override fun getLastId():Int{
         return model.getLastId()
+    }
+
+    override fun insertNote(note: Note, onSuccess: () -> Unit) {
+
     }
 
     override fun detach() { view = null }
