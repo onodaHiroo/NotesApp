@@ -22,9 +22,17 @@ class MainPresenter (private var view: IMainActivity?, private val model: INoteL
         view?.showNotes(model.getAllNotes())
     }
 
+    override fun deleteNote(note: Note, onSuccess: () -> Unit) {
+
+    }
+
     override fun editNote(note: Note) {
         model.editNote(note)
         view?.showNotes(model.getAllNotes())
+    }
+
+    override fun editNote(note: Note, onSuccess: () -> Unit) {
+
     }
 
     override fun getNoteById(id: Int) {

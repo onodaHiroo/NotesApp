@@ -13,6 +13,9 @@ interface INoteDao {
     @Delete
     suspend fun delete(note: Note)
 
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun update(note: Note)
+
     @Query("SELECT * from note_table")
     fun getAllNotes(): LiveData<List<Note>>
 }

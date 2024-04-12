@@ -15,7 +15,7 @@ import com.example.notes.db.NoteDatabase
 import com.example.notes.db.repository.NoteRepository
 import com.example.notes.models.Note
 import com.example.notes.presenter.IMainPresenter
-import com.example.notes.presenter.PresenterToRepo
+import com.example.notes.presenter.RepositoryPresenter
 import java.util.*
 
 
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(), IMainActivity{
         setContentView(binding.root)
 
         //presenter = MainPresenter(this, NoteModel())
-       presenter = PresenterToRepo(this, NoteRepository(NoteDatabase.getInstance(this.application)?.getNoteDao()!!))
+       presenter = RepositoryPresenter(this, NoteRepository(NoteDatabase.getInstance(this.application)?.getNoteDao()!!))
 
         initialDatabase()
         initialAdapter()
@@ -75,6 +75,7 @@ class MainActivity : AppCompatActivity(), IMainActivity{
         }
     }
 
+
     fun initialDatabase(){
         val context = this.application
         val daoNote = NoteDatabase.getInstance(context)?.getNoteDao()
@@ -97,8 +98,13 @@ class MainActivity : AppCompatActivity(), IMainActivity{
         presenter.insertNote(note){}
     }
 
+    //delete after all
     override fun deleteNotes(noteId: Int){
         presenter.deleteNote(noteId)
+    }
+
+    override fun deleteNotes(note: Note) {
+        presenter.deleteNote(note){}
     }
 
     override fun editNotes(note: Note){

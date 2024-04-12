@@ -20,7 +20,8 @@ class SwipeItem(dragDirs: Int, swipeDirs: Int) : ItemTouchHelper.SimpleCallback(
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        val position = viewHolder.adapterPosition
+       val position = viewHolder.adapterPosition
+        //val currentNote = viewHolder.itemView
         mNoteAdapter.deleteNote(position)
     }
 }

@@ -11,7 +11,7 @@ import com.example.notes.views.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PresenterToRepo(private var view: IMainActivity?, private val repository: INoteRepository):IMainPresenter, ViewModel(){
+class RepositoryPresenter(private var view: IMainActivity?, private val repository: INoteRepository):IMainPresenter, ViewModel(){
 
     lateinit var bufferModel: INoteList
 
@@ -29,6 +29,36 @@ class PresenterToRepo(private var view: IMainActivity?, private val repository: 
         }
     }
 
+    override fun deleteNote(note: Note, onSuccess: () -> Unit) {
+        viewModelScope.launch (Dispatchers.IO){
+            repository.deleteNote(note){
+                onSuccess()
+            }
+        }
+    }
+
+    override fun editNote(note: Note, onSuccess:() -> Unit) {
+        viewModelScope.launch (Dispatchers.IO){
+            repository.updateNote(note){
+                onSuccess()
+            }
+        }
+    }
+
+
+
+    override fun getNoteById(id: Int) {
+
+    }
+
+    override fun simpleTest(): INoteList {
+        return bufferModel.simpleTest()
+    }
+
+    override fun detach() { view = null }
+
+
+    //delete in future
     override fun addNote(note: Note) {
 
     }
@@ -38,19 +68,8 @@ class PresenterToRepo(private var view: IMainActivity?, private val repository: 
     }
 
     override fun editNote(note: Note) {
-
     }
 
-    override fun getNoteById(id: Int) {
-
-    }
-
-    override fun simpleTest(): INoteList {
-
-        return bufferModel.simpleTest()
-    }
-
-    override fun detach() { view = null }
 
     override fun getLastId(): Int {
         return 0

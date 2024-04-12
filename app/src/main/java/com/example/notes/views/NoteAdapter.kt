@@ -47,7 +47,8 @@ class NoteAdapter(private val context: Context, private val activity: IMainActiv
 
     @SuppressLint("NotifyDataSetChanged")
     fun deleteNote(position: Int) {
-        activity.deleteNotes(position)
+        val currentNote = noteList[position]
+        activity.deleteNotes(currentNote)
         notifyDataSetChanged()
     }
 

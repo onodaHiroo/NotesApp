@@ -20,6 +20,7 @@ class NoteRepository(private val noteDao: INoteDao): INoteRepository {
     }
 
     override suspend fun updateNote(note: Note, onSuccess: () -> Unit) {
-
+        noteDao.update(note)
+        onSuccess()
     }
 }
