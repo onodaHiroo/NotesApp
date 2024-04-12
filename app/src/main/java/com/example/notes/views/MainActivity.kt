@@ -152,5 +152,4 @@ class MainActivity : AppCompatActivity(), IMainActivity{
         builder.setView(dialogLayout)
         builder.show()
     }
-
 }
