@@ -12,10 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.R
 import com.example.notes.databinding.ActivityMainBinding
 import com.example.notes.db.NoteDatabase
+import com.example.notes.db.repository.INoteRepository
 import com.example.notes.db.repository.NoteRepository
 import com.example.notes.models.Note
 import com.example.notes.presenter.IMainPresenter
-import com.example.notes.presenter.RepositoryPresenter
+import com.example.notes.presenter.MainPresenter
 import java.util.*
 
 
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity(), IMainActivity{
     //РАБОТАЕТ КОГДА МЕНЯЕШЬ ВЕРСИЮ СДК
     private lateinit var presenter: IMainPresenter
 
-    private lateinit var repository: NoteRepository
+    private lateinit var repository: INoteRepository
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: NoteAdapter
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity(), IMainActivity{
         setContentView(binding.root)
 
         //presenter = MainPresenter(this, NoteModel())
-       presenter = RepositoryPresenter(this, NoteRepository(NoteDatabase.getInstance(this.application)?.getNoteDao()!!))
+       presenter = MainPresenter(this, NoteRepository(NoteDatabase.getInstance(this.application)?.getNoteDao()!!))
 
         initialDatabase()
         initialAdapter()
@@ -98,11 +99,6 @@ class MainActivity : AppCompatActivity(), IMainActivity{
         presenter.insertNote(note){}
     }
 
-//    //delete after all
-//    override fun deleteNotes(noteId: Int){
-//        presenter.deleteNote(noteId)
-//    }
-
     override fun deleteNotes(note: Note) {
         presenter.deleteNote(note){}
     }
@@ -139,7 +135,7 @@ class MainActivity : AppCompatActivity(), IMainActivity{
             builder.setPositiveButton("OK") { dialog, which ->
                 addNotes(
                     Note(
-                        id = presenter.getLastId(),
+                        id = 0,
                         title = editTextTitle.text.toString(),
                         text = editTextText.text.toString(),
                         changeDate = Date().toString(),
@@ -156,108 +152,5 @@ class MainActivity : AppCompatActivity(), IMainActivity{
         builder.setView(dialogLayout)
         builder.show()
     }
-
-
-
-
-
-
-
-
-
-
-
-
-//    override fun showEditTextDialog(note: Note, title: String?, text: String?){
-//        val builder = AlertDialog.Builder(this)
-//        val inflater = layoutInflater
-//        val dialogLayout = inflater.inflate(R.layout.edit_note_layout, null)
-//        val editTextTitle = dialogLayout.findViewById<EditText>(R.id.et_editTextTitle)
-//        val editTextText = dialogLayout.findViewById<EditText>(R.id.et_editTextText)
-//
-//        builder.setTitle("Write Note")
-//
-//        editTextTitle.setText(title)
-//        editTextText.setText(text)
-//
-//        if (note.id != null)
-//        builder.setPositiveButton("OK") { dialog, which ->
-//            editNotes(
-//                Note(
-//                    id = note.id,
-//                    title = editTextTitle.text.toString(),
-//                    text = editTextText.text.toString(),
-//                    changeDate = Date().toString(),
-//                    createDate = note.createDate
-//                    )
-//                )
-//            }
-//        else{
-//            builder.setPositiveButton("OK") { dialog, which ->
-//                addNotes(
-//                    Note(
-//                        id = presenter.getLastId(),
-//                        title = editTextTitle.text.toString(),
-//                        text = editTextText.text.toString(),
-//                        changeDate = Date().toString(),
-//                        createDate = Date().toString(),
-//                    )
-//                )
-//            }
-//        }
-//
-//
-//        builder.setNegativeButton("Cancel"){dialog, which ->
-//            Log.d("Main", "NegativeButtonClicked")
-//        }
-//        builder.setView(dialogLayout)
-//        builder.show()
-//    }
-
-
-    //delete after all
-//    override fun showEditTextDialog(noteId: Int?, title: String?, text: String?){}
-//        val builder = AlertDialog.Builder(this)
-//        val inflater = layoutInflater
-//        val dialogLayout = inflater.inflate(R.layout.edit_note_layout, null)
-//        val editTextTitle = dialogLayout.findViewById<EditText>(R.id.et_editTextTitle)
-//        val editTextText = dialogLayout.findViewById<EditText>(R.id.et_editTextText)
-//
-//        builder.setTitle("Write Note")
-//
-//        if (noteId == null){
-//            builder.setPositiveButton("OK"){dialog, which ->
-//                addNotes(Note(
-//                    presenter.getLastId(),
-//                    editTextTitle.text.toString(),
-//                    editTextText.text.toString(),
-//                    Date().toString(),
-//                    Date().toString()
-//                ))
-//                Log.d("testAddingNotes", "Note [${presenter.getLastId() - 1}] (${editTextTitle.text}, ${editTextText.text}) added")
-//                }
-//            }
-//        else {
-//            editTextTitle.setText(title)
-//            editTextText.setText(text)
-//            builder.setPositiveButton("OK") { dialog, which ->
-//                editNotes(
-//                    Note(
-//                    noteId,
-//                    editTextTitle.text.toString(),
-//                    editTextText.text.toString(),
-//                        Date().toString(),
-//                        Date().toString()
-//                        )
-//                    )
-//                }
-//            }
-//
-//        builder.setNegativeButton("Cancel"){dialog, which ->
-//            Log.d("Main", "NegativeButtonClicked")
-//            }
-//        builder.setView(dialogLayout)
-//        builder.show()
-//    }
 
 }

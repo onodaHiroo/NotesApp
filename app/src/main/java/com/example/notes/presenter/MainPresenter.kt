@@ -1,59 +1,45 @@
 package com.example.notes.presenter
 
-//import androidx.annotation.RequiresApi
-import com.example.notes.models.INoteList
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.notes.db.repository.INoteRepository
 import com.example.notes.models.Note
 import com.example.notes.views.IMainActivity
+import com.example.notes.views.MainActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class MainPresenter (private var view: IMainActivity?, private val model: INoteList) : IMainPresenter {
+class MainPresenter(private var view: IMainActivity?, private val repository: INoteRepository):IMainPresenter, ViewModel(){
 
     override fun loadNotes() {
-        view?.showNotes(model.getAllNotes())
+        repository.allNotes.observe(view as MainActivity, Observer { notes ->
+                view?.showNotes(notes)
+        })
     }
 
-//    override fun addNote(note: Note) {
-//        model.addNote(note)
-//        view?.showNotes(model.getAllNotes())
-//    }
-
-//   //@RequiresApi(Build.VERSION_CODES.N)
-//    override fun deleteNote(noteId: Int) {
-//        model.deleteNote(noteId)
-//        view?.showNotes(model.getAllNotes())
-//    }
+    override fun insertNote(note: Note, onSuccess:() -> Unit){
+        viewModelScope.launch (Dispatchers.IO){
+            repository.insertNote(note){
+                onSuccess()
+            }
+        }
+    }
 
     override fun deleteNote(note: Note, onSuccess: () -> Unit) {
-
+        viewModelScope.launch (Dispatchers.IO){
+            repository.deleteNote(note){
+                onSuccess()
+            }
+        }
     }
 
-//    override fun editNote(note: Note) {
-//        model.editNote(note)
-//        view?.showNotes(model.getAllNotes())
-//    }
-
-    override fun editNote(note: Note, onSuccess: () -> Unit) {
-
-    }
-
-//    override fun getNoteById(id: Int) {
-//        val note = model.getNoteById(id)
-//        if (note != null) {
-//            //view.displayNoteDetails(note)
-//        } else {
-//            //view.showNoteNotFoundError()
-//        }
-//    }
-
-    override fun simpleTest():INoteList {
-        return model.simpleTest()
-    }
-
-    override fun getLastId():Int{
-        return model.getLastId()
-    }
-
-    override fun insertNote(note: Note, onSuccess: () -> Unit) {
-
+    override fun editNote(note: Note, onSuccess:() -> Unit) {
+        viewModelScope.launch (Dispatchers.IO){
+            repository.updateNote(note){
+                onSuccess()
+            }
+        }
     }
 
     override fun detach() { view = null }
