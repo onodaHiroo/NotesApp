@@ -11,38 +11,38 @@ class MainPresenter (private var view: IMainActivity?, private val model: INoteL
         view?.showNotes(model.getAllNotes())
     }
 
-    override fun addNote(note: Note) {
-        model.addNote(note)
-        view?.showNotes(model.getAllNotes())
-    }
+//    override fun addNote(note: Note) {
+//        model.addNote(note)
+//        view?.showNotes(model.getAllNotes())
+//    }
 
-   //@RequiresApi(Build.VERSION_CODES.N)
-    override fun deleteNote(noteId: Int) {
-        model.deleteNote(noteId)
-        view?.showNotes(model.getAllNotes())
-    }
+//   //@RequiresApi(Build.VERSION_CODES.N)
+//    override fun deleteNote(noteId: Int) {
+//        model.deleteNote(noteId)
+//        view?.showNotes(model.getAllNotes())
+//    }
 
     override fun deleteNote(note: Note, onSuccess: () -> Unit) {
 
     }
 
-    override fun editNote(note: Note) {
-        model.editNote(note)
-        view?.showNotes(model.getAllNotes())
-    }
+//    override fun editNote(note: Note) {
+//        model.editNote(note)
+//        view?.showNotes(model.getAllNotes())
+//    }
 
     override fun editNote(note: Note, onSuccess: () -> Unit) {
 
     }
 
-    override fun getNoteById(id: Int) {
-        val note = model.getNoteById(id)
-        if (note != null) {
-            //view.displayNoteDetails(note)
-        } else {
-            //view.showNoteNotFoundError()
-        }
-    }
+//    override fun getNoteById(id: Int) {
+//        val note = model.getNoteById(id)
+//        if (note != null) {
+//            //view.displayNoteDetails(note)
+//        } else {
+//            //view.showNoteNotFoundError()
+//        }
+//    }
 
     override fun simpleTest():INoteList {
         return model.simpleTest()

@@ -31,7 +31,7 @@ class NoteAdapter(private val context: Context, private val activity: IMainActiv
         holder.itemView.findViewById<TextView>(R.id.create_date).text = noteList[position].createDate.toString()
         holder.itemView.setOnClickListener{
             Toast.makeText(context, "${position}", Toast.LENGTH_SHORT).show()
-            changeNote(position, noteList[position].title, noteList[position].text)
+            changeNote(noteList[position], noteList[position].title, noteList[position].text)
         }
     }
 
@@ -53,8 +53,8 @@ class NoteAdapter(private val context: Context, private val activity: IMainActiv
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun changeNote(position: Int, title: String, text: String){
-        activity.showEditTextDialog(position, title, text)
+    fun changeNote(note: Note, title: String, text: String){
+        activity.showEditTextDialog(note, title, text, false)
         notifyDataSetChanged()
     }
 }

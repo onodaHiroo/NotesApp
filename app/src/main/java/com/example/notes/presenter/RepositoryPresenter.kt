@@ -47,9 +47,9 @@ class RepositoryPresenter(private var view: IMainActivity?, private val reposito
 
 
 
-    override fun getNoteById(id: Int) {
-
-    }
+//    override fun getNoteById(id: Int) {
+//
+//    }
 
     override fun simpleTest(): INoteList {
         return bufferModel.simpleTest()
@@ -58,17 +58,17 @@ class RepositoryPresenter(private var view: IMainActivity?, private val reposito
     override fun detach() { view = null }
 
 
-    //delete in future
-    override fun addNote(note: Note) {
-
-    }
-
-    override fun deleteNote(noteId: Int) {
-
-    }
-
-    override fun editNote(note: Note) {
-    }
+//    //delete in future
+//    override fun addNote(note: Note) {
+//
+//    }
+//
+//    override fun deleteNote(noteId: Int) {
+//
+//    }
+//
+//    override fun editNote(note: Note) {
+//    }
 
 
     override fun getLastId(): Int {
