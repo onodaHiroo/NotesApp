@@ -17,6 +17,7 @@ import com.example.notes.db.repository.NoteRepository
 import com.example.notes.models.Note
 import com.example.notes.presenter.IMainPresenter
 import com.example.notes.presenter.MainPresenter
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -32,7 +33,6 @@ class MainActivity : AppCompatActivity(), IMainActivity{
     private lateinit var recyclerView: RecyclerView
 
 
-   // @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -113,6 +113,7 @@ class MainActivity : AppCompatActivity(), IMainActivity{
         val dialogLayout = inflater.inflate(R.layout.edit_note_layout, null)
         val editTextTitle = dialogLayout.findViewById<EditText>(R.id.et_editTextTitle)
         val editTextText = dialogLayout.findViewById<EditText>(R.id.et_editTextText)
+        val formatDate = SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(Date())
 
         builder.setTitle("Write Note")
 
@@ -126,7 +127,7 @@ class MainActivity : AppCompatActivity(), IMainActivity{
                         id = note.id,
                         title = editTextTitle.text.toString(),
                         text = editTextText.text.toString(),
-                        changeDate = Date().toString(),
+                        changeDate = "${formatDate} (edited)",
                         createDate = note.createDate
                     )
                 )
@@ -138,8 +139,8 @@ class MainActivity : AppCompatActivity(), IMainActivity{
                         id = 0,
                         title = editTextTitle.text.toString(),
                         text = editTextText.text.toString(),
-                        changeDate = Date().toString(),
-                        createDate = Date().toString(),
+                        changeDate = "",
+                        createDate = "${formatDate}",
                     )
                 )
             }

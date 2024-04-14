@@ -24,6 +24,10 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="12dp" />
+
         <TextView
             android:id="@+id/text"
             android:layout_width="match_parent"
